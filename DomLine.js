@@ -1,7 +1,6 @@
 /**
  * DomLine 
  * draw canvas line between corner of two DOM element
- * (why not SVG? good question!)
  * @author Badger
  * http://jeremypetrequin.fr/
  * 
@@ -20,7 +19,7 @@
         frameRate :30,  //you can change this value : RenderList.frameRate = 12;
         
         /**
-         * Enterframe method, launch method render on eatch item in renderList
+         * Enterframe method, launch method render on each item in renderList
          */
         render : function() {
             if(RenderList.paused) return

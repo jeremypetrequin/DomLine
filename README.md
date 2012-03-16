@@ -16,9 +16,13 @@ RenderList Static class
 Just a static class to make an enterframe render of several elements
 You can use it simply in any project/context you want : 
 
-Use RenderList.addItem(obj) and RenderList.removeItem(obj) to add object in renderList
+Use RenderList.addItem(obj) and RenderList.removeItem(obj) to add/remove object in renderList
+
 Use RenderList.resume() / RenderList.stop() to control the render
+
 You can set the RenderList.framerate = 30 to change the speed (frames per second)
+
+Use RenderList.dequeuAll() to remove all object 
 
 The only contraint is each object added in the renderList need to have a public propertie "posInRenderList" set to false;
 this property is used to not have to loop in the renderList to search a specific element

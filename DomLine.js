@@ -1,4 +1,4 @@
-/*!
+/**
  * DomLine 
  * draw canvas line between corner of two DOM element
  * (why not SVG? good question!)
@@ -11,16 +11,16 @@
 ;(function($, w) {
     
     /**
-     * Render List is a static class used for a enterFrame render of multiple element
+     * Render List is a static class used for an enterFrame render of several elements
      */
     //expose renderList on window
     w.RenderList =  {
         renderList : [],
         paused : true,
-        frameRate :30,  //you an change this value RenderList.frameRate = 12;
+        frameRate :30,  //you can change this value : RenderList.frameRate = 12;
         
         /**
-         * Enterframe method, launch method render og eatch item in renderList
+         * Enterframe method, launch method render on eatch item in renderList
          */
         render : function() {
             if(RenderList.paused) return
@@ -79,10 +79,11 @@
     * DomLine class
     */
     w.DomLine = function(one, two, settings) {
-        //privates properties
+        /*** privates properties ***/
         var _settings = {
             autorender : false, //automaticly render on enterFrame
             lineWidth : 1, //line width (in px)
+            lineColor : 'black', //color of line : a css standart color (red, white...) or rgba(0, 0, 0, 0)...
             debug : false //display red background on each canvas
         },
         _elmt1 = {
@@ -95,13 +96,14 @@
         },
         _$cv = null,
         _ctx = null,
-        _$b = $('body');
+        _$b = $('body'),
+        canvasSupported = true;
         
-        //public propertie (used in RenderList)
+        /*** public propertie (used in RenderList) ***/
         this.posInRenderList = false;
         
-        //public method
         
+        /*** public methods ***/
         /**
          * Render function,
          * if you set autorender at true, or if you call this.play(), this method'll render the line at enterFrame
@@ -123,9 +125,13 @@
             
             _ctx.clearRect(0, 0, w, _$cv[0].height);
             _ctx.beginPath();
+            
             _ctx.lineWidth=_settings.lineWidth;   
+            
             _ctx.moveTo((left1 < left2) ? 0 : w, (top1 > top2) ?  h : 0);
+            
             _ctx.lineTo((left1 > left2) ? 0 : w, (top1 > top2) ? 0 : h);
+            _ctx.strokeStyle = _settings.lineColor;
             _ctx.closePath();
             _ctx.stroke();
            
@@ -136,6 +142,10 @@
          * add this item in the renderList
          */
         this.resume = function() {
+            if(!canvasSupported) {
+                throw "Canvas not Suported";
+                return;
+            }
             RenderList.addItem(this);
             return this;
         }
@@ -144,11 +154,15 @@
         * remove this item from the renderList
         */ 
         this.pause  =function() {
+            if(!canvasSupported) {
+                throw "Canvas not Suported";
+                return;
+            }
             RenderList.removeItem(this);
             return this;
         }
         
-        //init
+        /*** init ***/
         _settings = $.extend({},this._settings,settings);
         _elmt1 = $.extend({},this._elmt1,one);
         _elmt2 = $.extend({},this._elmt2,two);
@@ -158,8 +172,14 @@
         _$cv = $('<canvas>', {css : {position : 'absolute', display : 'block'}});
         if(_settings.debug) _$cv.css('background', 'red');
         _$b.append(_$cv);
-        _ctx = _$cv[0].getContext('2d');
+        if(!(_$cv[0].getContext && (_ctx =_$cv[0].getContext('2d')))) {
+            canvasSupported = false;
+            throw "Canvas not Suported";
+            return;
+        }
         
+        
+
         this.render();
         if(_settings.autorender) this.resume();
         return this;

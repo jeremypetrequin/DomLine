@@ -43,7 +43,7 @@
 </head>
 <body>
     <div id="info">
-        Click anyway to stop/resume the render of lines, but not the animations
+        Click anyway to stop/resume the render of lines, but not the animations <a href="https://github.com/jeremypetrequin/DomLine" title="Jeremy Petrequin github" target="_blank">view on Github</a>
     </div>
 
 
@@ -80,6 +80,7 @@
         autorender : true
     });
     
+    
     //line 3
     var line3 = new DomLine({
         elmt : $('#elmt2'),
@@ -89,20 +90,21 @@
         place : ['center', 'top']
     }).resume();
     
+    RenderList.frameRate = 60;
     //stop all line
     $('*').click(function() {RenderList.paused ? RenderList.resume() : RenderList.pause();});
     
     //anim the block
     anim();
     function anim() { //recursive animation on the div
-        $('#elmt2').animate({top : Math.random()*500, right :Math.random()* 100}, 2000);
-        $('#elmt3').animate({right : Math.random() * 20+'%'}, 2000);
-        $('#elmt1').animate({top :100, left : 150}, 2000, function() {
+        $('#elmt2').animate({top : Math.random()*500, right :Math.random()* 1000}, 2000);
+        $('#elmt3').animate({right : Math.random() * 20+'%', bottom : Math.random()*100+'%'}, 2000);
+        $('#elmt1').animate({top :100, left : 1050}, 2000, function() {
             $('#elmt1').animate({top :600, left : 20}, 2000, function() {
                 anim();
             });
-            $('#elmt3').animate({right : Math.random() * 100+'%'}, 2000);
-            $('#elmt2').animate({top :500, right : 10}, 2000);
+            $('#elmt3').animate({right : Math.random() * 100+'%', bottom : Math.random()*10+'%'}, 2000);
+            $('#elmt2').animate({top :500, right : 100}, 2000);
         });
         
         

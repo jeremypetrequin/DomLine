@@ -1,3 +1,5 @@
+DomLine
+=============
 DomLine is a Javascript class (not the most usefull you ever seen, i'm agree ;) ) to create Line between two DOM elements
 
 Line are canvas element (why not SVG? good question..!), (one canvas for each line) so DomLine only supports HMTL5 browsers, and need jQuery to working fine
@@ -9,6 +11,8 @@ or in this simple example : http://jeremypetrequin.fr/projets/domline/
 The file DomLine containt two Javascript classes in fact :
 
 RenderList 
+---------
+
 Just a static class to make an enterframe render of several elements
 You can use it simply in any project/context you want : 
 
@@ -36,7 +40,8 @@ RenderList.addItem(obj); // add object in render queue
 RenderList.resume(); //launch the render
 RenderList.remove(obj); //remove object from render queue (but render loop of RenderList still playing...)
 
-Then, the class DomLine :
+DomLine class:
+-------------
 
 to create a new line, simply does :
 var line = new DomLine(param1, param2, param3);

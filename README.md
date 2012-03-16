@@ -10,7 +10,7 @@ or in this simple example : http://jeremypetrequin.fr/projets/domline/
 
 The file DomLine containt two Javascript classes in fact :
 
-RenderList 
+RenderList Static class
 ---------
 
 Just a static class to make an enterframe render of several elements
@@ -57,6 +57,7 @@ params are :
 place is the anchor for the line (could be an array or a string):
 value could be : center || left || right, center || top || bottom
 example : ['center', 'center'] place the anchor on the center of the element, 'center-center' will produce the same result
+
 param2 is the same object than param1, except that param2.elmt have to be the jQuery object of the second element of course.
 
     param3 = {//settings object : 

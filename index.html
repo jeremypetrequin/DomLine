@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DomLine</title>
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+        * {cursor: pointer;}
+        #elmt1 {
+            position: absolute;
+            top: 20%;
+            left: 129px;
+            width: 200px;
+            height: 122px;
+            background: gray;
+        }
+        
+        #elmt2 {
+            position: absolute;
+            top: 309px;
+            right: 100px;
+            width: 200px;
+            height: 122px;
+            background: gray;
+        }
+        
+        #elmt3 {
+            position: absolute;
+            bottom: 10%;
+            right: 45%;
+            width: 200px;
+            height: 122px;
+            background: gray;
+        }
+    </style>
+
+    
+
+    
+</head>
+<body>
+    <div id="info">
+        Click anyway to stop/resume the render of lines, but not the animations
+    </div>
+
+
+<div id="elmt1">Element 1</div>
+<div id="elmt2">Element 2</div>
+<div id="elmt3">Element 3</div>
+    
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="DomLine.js"></script>
+<script>
+    
+    //line 1
+    var line1 = new DomLine({
+        elmt : $('#elmt1'),
+        place : 'right-center'
+    }, {
+        elmt : $('#elmt2'),
+        place : ['left', 'center']
+    }, {
+        autorender : true
+    }).resume();
+    
+    //line 2
+    var line2 = new DomLine({
+        elmt : $('#elmt1'),
+        place : 'right-center'
+    }, {
+        elmt : $('#elmt3'),
+        place : ['center', 'top']
+    }, {
+        autorender : true
+    });
+    
+    //line 3
+    var line3 = new DomLine({
+        elmt : $('#elmt2'),
+        place : 'left-center'
+    }, {
+        elmt : $('#elmt3'),
+        place : ['center', 'top']
+    }).resume();
+    
+    //stop all line
+    $('*').click(function() {RenderList.paused ? RenderList.resume() : RenderList.pause();});
+    
+    //anim the block
+    anim();
+    function anim() { //recursive animation on the div
+        $('#elmt2').animate({top : Math.random()*500, right :Math.random()* 100}, 2000);
+        $('#elmt3').animate({right : Math.random() * 20+'%'}, 2000);
+        $('#elmt1').animate({top :100, left : 150}, 2000, function() {
+            $('#elmt1').animate({top :600, left : 20}, 2000, function() {
+                anim();
+            });
+            $('#elmt3').animate({right : Math.random() * 100+'%'}, 2000);
+            $('#elmt2').animate({top :500, right : 10}, 2000);
+        });
+        
+        
+    }
+</script>
+</body>
+</html>

@@ -44,18 +44,22 @@ DomLine class:
 -------------
 
 to create a new line, simply does :
+
     var line = new DomLine(param1, param2, param3);
+
 params are :
-    param1 : an object containing : {
+    
+    param1 = {
         elmt : $('#firstElement'),//jQuery object of the first element 
-        place : //anchor for the line (could be an array or a string):
-                    //value could be : center || left || right, center || top || bottom
-                    //example : ['center', 'center'] place the anchor on the center of the element, 'center-center' will produce the same result
+        place : ['center', 'center']
     }
 
-    param2 is the same object than param1, except that param2.elmt have to be the jQuery object of the second element of course.
+place is the anchor for the line (could be an array or a string):
+value could be : center || left || right, center || top || bottom
+example : ['center', 'center'] place the anchor on the center of the element, 'center-center' will produce the same result
+param2 is the same object than param1, except that param2.elmt have to be the jQuery object of the second element of course.
 
-    param3 is a settings object : {
+    param3 = {//settings object : 
         autorender : false, //if true, push the current object in the renderList and refresh the line at each frame (so you don't need to call the "play()" method
         lineWidth : 1, //set the line width, in pixel, uint
         lineColor : 'black', //set the color of the line, string : any "standart" color (red, green, white...) or rgb/rgba : rgba(255, 0, 0, 0.5); (> a red, 50% opacity)

@@ -82,7 +82,7 @@
         var _settings = {
             autorender : false, //automaticly render on enterFrame
             lineWidth : 1, //line width (in px)
-            lineColor : 'black', //color of line : a css standart color (red, white...) or rgba(0, 0, 0, 0)...
+            lineColor : 'black', //color of line : a css standart color (red, white...) or rgb/rgba(0, 0, 0, 0)...
             debug : false //display red background on each canvas
         },
         _elmt1 = {
@@ -122,14 +122,14 @@
             var w = _$cv[0].width = Math.max(left1 - left2, left2 - left1);
             
             
-            _ctx.clearRect(0, 0, w, _$cv[0].height);
+            _ctx.clearRect(0, 0, w, h);
             _ctx.beginPath();
             
             _ctx.lineWidth=_settings.lineWidth;   
             
-            _ctx.moveTo((left1 < left2) ? 0 : w, (top1 > top2) ?  h : 0);
+            _ctx.moveTo(left1 < left2 ? 0 : w, top1 > top2 ?  h : 0);
             
-            _ctx.lineTo((left1 > left2) ? 0 : w, (top1 > top2) ? 0 : h);
+            _ctx.lineTo(left1 > left2 ? 0 : w, top1 > top2 ? 0 : h);
             _ctx.strokeStyle = _settings.lineColor;
             _ctx.closePath();
             _ctx.stroke();
@@ -141,10 +141,7 @@
          * add this item in the renderList
          */
         this.resume = function() {
-            if(!canvasSupported) {
-                throw "Canvas not Suported";
-                return;
-            }
+            if(!canvasSupported) {throw "Canvas not Suported";return;}
             RenderList.addItem(this);
             return this;
         }
@@ -153,10 +150,7 @@
         * remove this item from the renderList
         */ 
         this.pause  =function() {
-            if(!canvasSupported) {
-                throw "Canvas not Suported";
-                return;
-            }
+            if(!canvasSupported) {throw "Canvas not Suported";return;}
             RenderList.removeItem(this);
             return this;
         }

@@ -1,6 +1,6 @@
 /**
  * DomLine 
- * draw canvas line between corner of two DOM element
+ * draw canvas line between two DOM element
  * @author Badger
  * http://jeremypetrequin.fr/
  * 
@@ -141,7 +141,7 @@
          * add this item in the renderList
          */
         this.resume = function() {
-            if(!canvasSupported) {throw "Canvas not Suported";return;}
+            if(!canvasSupported) {throw "Canvas not Supported";return;}
             RenderList.addItem(this);
             return this;
         }
@@ -150,7 +150,7 @@
         * remove this item from the renderList
         */ 
         this.pause  =function() {
-            if(!canvasSupported) {throw "Canvas not Suported";return;}
+            if(!canvasSupported) {throw "Canvas not Supported";return;}
             RenderList.removeItem(this);
             return this;
         }
@@ -167,8 +167,8 @@
         _$b.append(_$cv);
         if(!(_$cv[0].getContext && (_ctx =_$cv[0].getContext('2d')))) {
             canvasSupported = false;
-            throw "Canvas not Suported";
-            return;
+            throw "Canvas not Supported";
+            return false;
         }
         
         
